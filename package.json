@@ -1,0 +1,26 @@
+{
+  "name": "book-management-system",
+  "version": "1.0.0",
+  "description": "library system",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madhumitha-r26/Book-Management-System.git"
+  },
+  "author": "madhu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/madhumitha-r26/Book-Management-System/issues"
+  },
+  "homepage": "https://github.com/madhumitha-r26/Book-Management-System#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
