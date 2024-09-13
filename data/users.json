@@ -37,11 +37,11 @@
 },
 
 {
-    "id":4,
+    "id":"4",
     "name": "Jane",
     "surname": "Doe",
     "email": "user@email.com",
-    "subscriptionType": "Premid",
+    "subscriptionType": "Premium",
     "subscriptionDate": "01/01/2022"
 }
 
