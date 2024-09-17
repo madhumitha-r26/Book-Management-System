@@ -140,4 +140,44 @@ router.delete("/:id",(req,res)=>{
 });
 
 
+//---------USER ID WITH SUBSCRIPTION DETAILS----------
+router.get("/subscription-details/:id",(req,res)=>{
+    const {id}= req.params;
+    const user= users.find((each)=> each.id ===id);
+    
+    if(!user){
+        return res.status(404).json({
+            success: false, 
+            message:"user with id doesn't exists!"
+        });
+    }  
+
+    const getdateindays = (data ="")=>{
+        let date;
+        if(data===""){
+            date=new Date();
+        }
+        else{
+            date=new Date(data);
+        }
+        let days = Math.floor(data/(1000*60*60*24)); //sec:min:hr 
+        return days; //floor is used to get integer type data
+    };
+    
+    const subscriptiontype= (date) =>{
+        if((users.subscriptionType = "Basic")){
+            date=date+90     //3-months
+        }
+        else if((users.subscriptionType = "Standard")){
+            date=date+180   //6-months
+        }
+        else if((users.subscriptionType = "Basic")){
+            date=date+365   //1-year
+        }
+        return date;
+    }
+});
+
+
+
 module.exports=router;
