@@ -33,6 +33,13 @@ app.get("/users", (req, res) => {
 });
 });
 
+app.get("/books", (req, res) => {
+    res.status(200).json({
+    message: "Server is up and running :-))",
+    data:"hey book",
+});
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`);

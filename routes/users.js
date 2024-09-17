@@ -152,30 +152,59 @@ router.get("/subscription-details/:id",(req,res)=>{
         });
     }  
 
-    const getdateindays = (data ="")=>{
+    const getdateindays = (data = "")=>{ //empty string is the default value
         let date;
-        if(data===""){
-            date=new Date();
+        if(data === ""){
+            date = new Date();
         }
         else{
-            date=new Date(data);
+            date = new Date(data);
         }
-        let days = Math.floor(data/(1000*60*60*24)); //sec:min:hr 
+        let days = Math.floor(date/(1000*60*60*24)); //sec:min:hr 
         return days; //floor is used to get integer type data
     };
     
     const subscriptiontype= (date) =>{
-        if((users.subscriptionType = "Basic")){
+        if((users.subscriptionType == "Basic")){
             date=date+90     //3-months
         }
-        else if((users.subscriptionType = "Standard")){
+        else if((users.subscriptionType == "Standard")){
             date=date+180   //6-months
         }
-        else if((users.subscriptionType = "Basic")){
+        else if((users.subscriptionType == "Basic")){
             date=date+365   //1-year
         }
         return date;
-    }
+    };
+
+    // Jan 1 1970 UTC
+    let returnDate = getdateindays(user.returnDate); //only for book
+    let currentDate = getdateindays();
+    let subscriptionDate = getdateindays(user.subscriptionDate);
+    let subscriptionExpiration = subscriptiontype(subscriptionDate);
+
+    const data={
+        ...user,
+        subscriptionExpired : subscriptionExpiration < currentDate,
+        daysleftforsubscription : subscriptionExpiration <= currentDate ? 0 : subscriptionExpiration - currentDate,
+        fine : returnDate < currentDate    //this is nested if else
+               ? subscriptionExpiration <= currentDate 
+               ? 100 // if part
+               : 50 // if-else part
+               : 0 //else part
+    };
+
+    // console.log(returnDate);
+    // console.log(currentDate);
+    // console.log(subscriptionDate);
+    // console.log(subscriptionExpiration);
+
+    return res.status(200).json({
+        success:true,
+        message:"subscription detail for the user is:",
+        data,
+    }); 
+
 });
 
 
