@@ -1,15 +1,17 @@
 //---------INITIALIZATIONS----------------
 
 const express = require("express");
-//const {users}= require("./data/users.json");
-//const {books}= require("./data/books.json");
+const dotenv=require("dotenv");
+
 const app = express();
 const PORT = 8081;
-
 
 const userRouter= require("./routes/users.js")
 const booksRouter= require("./routes/books.js")
 
+const DbConnection=require("./databaseConnection.js");
+
+dotenv.config();
 
 app.use(express.json());
 
