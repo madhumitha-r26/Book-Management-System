@@ -3,7 +3,8 @@ const {users}= require("../data/users.json");
 const {books}= require("../data/books.json");
 const router=express.Router();
 
-module.exports=router;
+const {UserModel,BookModel}= require("../models/index.js");
+const {getAllBooks , getSingleBookById} = require("../controllers/book-controllers.js")
 
 
 //---------GETTING ALL BOOKS DATA----------------
