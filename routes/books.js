@@ -4,20 +4,24 @@ const {books}= require("../data/books.json");
 const router=express.Router();
 
 const {UserModel,BookModel}= require("../models/index.js");
-const {getAllBooks , getSingleBookById} = require("../controllers/book-controllers.js")
+const {getAllBooks , getSingleBookById, addNewBook, getAllIsssuedBooks, updateBookById, deleteBook} = require("../controllers/book-controllers.js")
 
 
 //---------GETTING ALL BOOKS DATA----------------
-router.get("/",(req,res)=>{
+router.get("/",getAllBooks);
+
+/*router.get("/",(req,res)=>{
     res.status(200).json({
         success:true,
         message:"got all books",
         data:books,
     });
-}); 
+}); */
 
 //-------------GETTING ISSUED BOOK ---------------
-router.get("/issued/user",(req,res)=>{
+router.get("/issued/user",getAllIsssuedBooks);
+
+/*router.get("/issued/user",(req,res)=>{
     const userwithissuedbookissued = users.filter((each)=>{
      if(each.issuedBook)
        {
@@ -50,10 +54,12 @@ router.get("/issued/user",(req,res)=>{
          data:issuedBooks
      });
     }
- });
+ });*/
  
 //---------GETTING BOOK BY ID----------------
-router.get("/:id",(req,res)=>{
+router.get("/",getSingleBookById);
+
+/*router.get("/:id",(req,res)=>{
     const {id} = req.params; //used for getting id
     const book= books.find((each)=> each.id ===id);
     
@@ -71,10 +77,12 @@ router.get("/:id",(req,res)=>{
     });   
     }
 });
-
+*/
 
 //--------------ADDING NEW BOOK ---------------
-router.post("/",(req,res)=>{
+router.post("/",addNewBook);
+
+/*router.post("/",(req,res)=>{
     const {data} = req.body;
     if(!data){
         return res.status(400).json({
@@ -99,10 +107,12 @@ router.post("/",(req,res)=>{
             data: allBooks
     });   
 }); 
-
+*/
 
 //--------------UPDATING BOOK ---------------
-router.put("/updatebook/:id",(req,res)=>{
+router.put("/updatebook/:id",updateBookById);
+
+/*router.put("/updatebook/:id",(req,res)=>{
     const {id}= req.params;
     const {data}=req.body
     
@@ -130,10 +140,12 @@ router.put("/updatebook/:id",(req,res)=>{
         data: updateBookData,   //new array
     });   
 }); 
-
+*/
 
 //--------------DELETING BOOK ---------------
-router.delete("/:id",(req,res)=>{
+router.delete("/:id",deleteBook);
+
+/*router.delete("/:id",(req,res)=>{
     const {id}= req.params;
     const {data}=req.body
     const book= books.find((each)=> each.id ===id);
@@ -153,6 +165,6 @@ router.delete("/:id",(req,res)=>{
         data: books,
     }); 
 });
-
+*/
 
 module.exports=router;

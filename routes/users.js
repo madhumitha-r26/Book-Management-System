@@ -2,6 +2,7 @@
 
 const express = require("express");
 const { users }= require("../data/users.json");
+const { getAllUsers, addNewUser, updateUserById, deleteUser, getSubscribedUser } = require("../controllers/user-controllers");
 const router = express.Router();
 
 //const userRouter= require("./routes/users.js")
@@ -24,12 +25,12 @@ const router = express.Router();
 /* for book we need seperate js file */
 
 //---------GETTING ALL USERS DATA----------------
-router.get("/",(req,res)=>{
+/*router.get("/",(req,res)=>{
     res.status(200).json({
         success:true,
         data:users,
     });
-});
+});*/
 
 
 /*
@@ -41,7 +42,7 @@ router.get("/",(req,res)=>{
 */
 
 //---------GETTING USER BY ID----------------
-router.get("/:id",(req,res)=>{
+/*router.get("/:id",(req,res)=>{
     const {id} = req.params; //used for getting id
     const user= users.find((each)=> each.id ===id);
     
@@ -58,11 +59,14 @@ router.get("/:id",(req,res)=>{
             data: user,
     });   
     }
-});
+}); */
+
+router.get("/",getAllUsers)
 
 
 //--------------ADDING NEW USER ---------------
-router.post("/",(req,res)=>{
+router.post("/",addNewUser)
+/*router.post("/",(req,res)=>{
     const {id,name,surname,email,subscriptionType,subscriptionDate} = req.body;
     const user= users.find((each)=> each.id ===id);
     
@@ -86,10 +90,11 @@ router.post("/",(req,res)=>{
             data: users,
         });   
 }); 
-
+*/
 
 //--------------UPDATING USER ---------------
-router.put("/:id",(req,res)=>{
+router.put("/:id",updateUserById)
+/*router.put("/:id",(req,res)=>{
     const {id}= req.params;
     const {data}=req.body
     const user= users.find((each)=> each.id ===id);
@@ -115,10 +120,12 @@ router.put("/:id",(req,res)=>{
         data: updateUserData,   //new array
     });   
 }); 
-
+*/
 
 //--------------DELETING USER ---------------
-router.delete("/:id",(req,res)=>{
+
+router.delete("/:id",deleteUser)
+/* router.delete("/:id",(req,res)=>{
     const {id}= req.params;
     const {data}=req.body
     const user= users.find((each)=> each.id ===id);
@@ -138,10 +145,11 @@ router.delete("/:id",(req,res)=>{
         data: users,
     }); 
 });
-
+*/
 
 //---------USER ID WITH SUBSCRIPTION DETAILS----------
-router.get("/subscription-details/:id",(req,res)=>{
+router.get("/subscription-details/:id",getSubscribedUser)
+/*router.get("/subscription-details/:id",(req,res)=>{
     const {id}= req.params;
     const user= users.find((each)=> each.id ===id);
     
@@ -206,7 +214,7 @@ router.get("/subscription-details/:id",(req,res)=>{
     }); 
 
 });
-
+*/
 
 
 module.exports=router;
